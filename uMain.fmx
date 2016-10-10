@@ -1,0 +1,55 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'Status Bar Color'
+  ClientHeight = 486
+  ClientWidth = 369
+  Fill.Color = claRed
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  OnResize = FormResize
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Content: TRectangle
+    Align = Client
+    Sides = []
+    Size.Width = 369.000000000000000000
+    Size.Height = 486.000000000000000000
+    Size.PlatformDefault = False
+    object rNavBar: TRectangle
+      Align = MostBottom
+      Fill.Color = claBlack
+      Position.Y = 436.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+    end
+  end
+  object ColorPanel1: TColorPanel
+    Align = Center
+    Color = claRed
+    Size.Width = 282.000000000000000000
+    Size.Height = 274.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    OnChange = ColorPanel1Change
+  end
+  object chUseBlackNavBar: TCheckBox
+    Position.X = 128.000000000000000000
+    Position.Y = 40.000000000000000000
+    TabOrder = 2
+    Text = 'Black NavBar'
+    OnChange = chUseBlackNavBarChange
+  end
+  object ColorBox1: TColorBox
+    Color = claRed
+    Position.X = 24.000000000000000000
+    Position.Y = 48.000000000000000000
+    TabOrder = 1
+    Visible = False
+  end
+end
