@@ -13,7 +13,7 @@ interface
 uses
   System.UITypes, FMX.Dialogs, FMX.Platform
 {$IFDEF ANDROID} ,
-  Androidapi.JNI.GraphicsContentViewText, Androidapi.JNIBridge, Androidapi.Helpers,
+  Androidapi.JNI.GraphicsContentViewText, Androidapi.JNIBridge, Androidapi.Helpers, Androidapi.JNI.OS,
   Androidapi.JNI.JavaTypes, Androidapi.JNI.App, Androidapi.JNI.Util, FMX.Platform.Android, FMX.Helpers.Android
 {$ELSEIF defined(IOS)}
     , FMX.Helpers.iOS, FMX.Platform.iOS, iOSapi.UIKit, iOSapi.Foundation, iOSapi.CoreGraphics, iOSapi.CoreImage
@@ -166,23 +166,41 @@ begin
 {$ENDIF}
 end;
 
-procedure StatusBarGetBounds(out StatusBar, NavigationBar : Integer);
+procedure StatusBarGetBounds(out StatusBar, NavigationBar: Integer);
 {$IFDEF ANDROID}
 var
   resourceID: Integer;
   ScreenService: IFMXScreenService;
   sScale: Single;
+  sAbis: string;
+  arrObjAbis: TJavaObjectArray<JString>;
+  I: Integer;
+  needCheckStatusBarHeight: boolean;
 {$ENDIF}
 begin
   NavigationBar := 0;
   StatusBar := 0;
 {$IFDEF ANDROID}
-  if TOSVersion.Check(5, 0) then // вроде только работает с 5.0 ниже нет устройства проверить
+  if TOSVersion.Major >= 5 then
+  begin
+    sAbis := '';
+    arrObjAbis := TJBuild.JavaClass.SUPPORTED_ABIS;
+    for I := 0 to arrObjAbis.Length - 1 do
+      sAbis := sAbis + ',' + JStringToString(arrObjAbis.Items[I]);
+    sAbis := sAbis.trim([',']);
+  end
+  else
+    sAbis := JStringToString(TJBuild.JavaClass.CPU_ABI) + ',' + JStringToString(TJBuild.JavaClass.CPU_ABI2);
+
+  needCheckStatusBarHeight := sAbis.Contains('x86') or JStringToString(TJBuild.JavaClass.FINGERPRINT).Contains('intel')
+    or sAbis.Contains('arm64-v8a');
+
+  if (TOSVersion.Major >= 5) or (needCheckStatusBarHeight) then
+  // вроде только работает с 5.0 ниже нет устройства проверить
   begin
     sScale := 1;
     if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterface(ScreenService)) then
       sScale := ScreenService.GetScreenScale; // получаем скейл
-    ScaleInt := Trunc(sScale);
 
     resourceID := TAndroidHelper.Activity.getResources.getIdentifier(StringToJString('status_bar_height'),
       StringToJString('dimen'), StringToJString('android'));
@@ -190,9 +208,7 @@ begin
       StatusBar := Trunc(TAndroidHelper.Activity.getResources.getDimensionPixelSize(resourceID) / sScale);
 
     if hasNavbar(NavigationBar) then
-    begin
       NavigationBar := Trunc(NavigationBar / sScale);
-    end;
   end;
 {$ENDIF}
 end;

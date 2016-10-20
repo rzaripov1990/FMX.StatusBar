@@ -10,46 +10,64 @@ object FormMain: TFormMain
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnActivate = FormActivate
+  OnCreate = FormCreate
   OnResize = FormResize
-  OnShow = FormShow
-  DesignerMasterStyle = 0
+  DesignerMasterStyle = 3
   object Content: TRectangle
     Align = Client
     Sides = []
     Size.Width = 369.000000000000000000
     Size.Height = 486.000000000000000000
     Size.PlatformDefault = False
-    object rNavBar: TRectangle
-      Align = MostBottom
-      Fill.Color = claBlack
-      Position.Y = 436.000000000000000000
+    object Label1: TLabel
+      Align = Top
+      StyledSettings = [Family, Style, FontColor]
       Size.Width = 369.000000000000000000
-      Size.Height = 50.000000000000000000
+      Size.Height = 30.000000000000000000
       Size.PlatformDefault = False
-      Visible = False
+      TextSettings.Font.Size = 22.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 'FMX.StatusBar'
+    end
+    object chUseBlackNavBar: TCheckBox
+      Anchors = []
+      Margins.Left = 80.000000000000000000
+      Margins.Right = 80.000000000000000000
+      Position.X = 128.000000000000000000
+      Position.Y = 38.000000000000000000
+      Size.Width = 137.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Black NavBar'
+      OnChange = chUseBlackNavBarChange
     end
   end
   object ColorPanel1: TColorPanel
     Align = Center
     Color = claRed
+    ColorBox = ColorBox1
     Size.Width = 282.000000000000000000
     Size.Height = 274.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     OnChange = ColorPanel1Change
   end
-  object chUseBlackNavBar: TCheckBox
-    Position.X = 128.000000000000000000
-    Position.Y = 40.000000000000000000
-    TabOrder = 2
-    Text = 'Black NavBar'
-    OnChange = chUseBlackNavBarChange
-  end
   object ColorBox1: TColorBox
     Color = claRed
     Position.X = 24.000000000000000000
     Position.Y = 48.000000000000000000
     TabOrder = 1
+    Visible = False
+  end
+  object rNavBar: TRectangle
+    Align = MostBottom
+    Fill.Color = claBlack
+    Position.Y = 436.000000000000000000
+    Sides = []
+    Size.Width = 369.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
     Visible = False
   end
 end
