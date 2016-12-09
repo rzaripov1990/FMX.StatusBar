@@ -9,8 +9,6 @@ object FormMain: TFormMain
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  OnActivate = FormActivate
-  OnCreate = FormCreate
   OnResize = FormResize
   DesignerMasterStyle = 3
   object Content: TRectangle
@@ -29,19 +27,6 @@ object FormMain: TFormMain
       TextSettings.HorzAlign = Center
       Text = 'FMX.StatusBar'
     end
-    object chUseBlackNavBar: TCheckBox
-      Anchors = []
-      Margins.Left = 80.000000000000000000
-      Margins.Right = 80.000000000000000000
-      Position.X = 128.000000000000000000
-      Position.Y = 38.000000000000000000
-      Size.Width = 137.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 0
-      Text = 'Black NavBar'
-      OnChange = chUseBlackNavBarChange
-    end
   end
   object ColorPanel1: TColorPanel
     Align = Center
@@ -58,16 +43,6 @@ object FormMain: TFormMain
     Position.X = 24.000000000000000000
     Position.Y = 48.000000000000000000
     TabOrder = 1
-    Visible = False
-  end
-  object rNavBar: TRectangle
-    Align = MostBottom
-    Fill.Color = claBlack
-    Position.Y = 436.000000000000000000
-    Sides = []
-    Size.Width = 369.000000000000000000
-    Size.Height = 50.000000000000000000
-    Size.PlatformDefault = False
     Visible = False
   end
 end
