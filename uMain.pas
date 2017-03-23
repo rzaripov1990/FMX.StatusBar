@@ -24,6 +24,7 @@ type
     Label1: TLabel;
     procedure FormResize(Sender: TObject);
     procedure ColorPanel1Change(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure RebuildOrientation;
@@ -49,6 +50,11 @@ end;
 procedure TFormMain.FormResize(Sender: TObject);
 begin
   RebuildOrientation;
+end;
+
+procedure TFormMain.FormShow(Sender: TObject);
+begin
+  ColorPanel1Change(nil);
 end;
 
 procedure TFormMain.RebuildOrientation;

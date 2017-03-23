@@ -4,10 +4,10 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <PropertyGroup>
-        <DeviceId Condition="'$(Platform)'=='Android'"/>
+        <DeviceId Condition="'$(Platform)'=='Android'">066ab2310ac64b09</DeviceId>
         <DeviceId Condition="'$(Platform)'=='iOSDevice32'"/>
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
-        <DeviceId Condition="'$(Platform)'=='iOSSimulator'">A8F72BBE-64E3-4724-99CA-F0ECBD1975C4</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone5</DeviceId>
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice64'"/>
     <ItemGroup Condition="'$(Platform)'=='Win64'"/>
@@ -535,19 +535,19 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_87x87.png" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1536.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>prgStatusBar.app\</RemoteDir>
-            <RemoteName>FM_ApplicationIcon_87x87.png</RemoteName>
-            <DeployClass>iPhone_AppIcon87</DeployClass>
+            <RemoteName>Default-Landscape@2x~ipad.png</RemoteName>
+            <DeployClass>iPad_Launch2048x1536</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1536.png" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_87x87.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>prgStatusBar.app\</RemoteDir>
-            <RemoteName>Default-Landscape@2x~ipad.png</RemoteName>
-            <DeployClass>iPad_Launch2048x1536</DeployClass>
+            <RemoteName>FM_ApplicationIcon_87x87.png</RemoteName>
+            <DeployClass>iPhone_AppIcon87</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -693,15 +693,6 @@
             <RemoteDir>prgStatusBar.app\</RemoteDir>
             <RemoteName>Default-568h@2x.png</RemoteName>
             <DeployClass>iPhone_Launch640x1136</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="iOSSimulator\Debug\prgStatusBar.rsm" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>prgStatusBar.app\</RemoteDir>
-            <RemoteName>prgStatusBar.rsm</RemoteName>
-            <DeployClass>DebugSymbols</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
