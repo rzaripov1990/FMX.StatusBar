@@ -47,8 +47,8 @@ begin
   else
     sAbis := JStringToString(TJBuild.JavaClass.CPU_ABI) + ',' + JStringToString(TJBuild.JavaClass.CPU_ABI2);
 
-  needCheckStatusBarHeight := sAbis.Contains('x86') or JStringToString(TJBuild.JavaClass.FINGERPRINT).Contains('intel')
-    or sAbis.Contains('arm64-v8a');
+  needCheckStatusBarHeight := (sAbis.Contains('x86') or JStringToString(TJBuild.JavaClass.FINGERPRINT).Contains('intel')
+    or sAbis.Contains('arm64-v8a')) and TOSVersion.Major >= 4;
 
   if (TOSVersion.Major >= 5) or (needCheckStatusBarHeight) then
   begin
@@ -65,6 +65,7 @@ begin
 {$ENDIF}
 end;
 
+{$IF CompilerVersion < 32.0}
 {$IFDEF IOS}
 
 function GetStatusBarView: UIView;
@@ -108,14 +109,20 @@ begin
     SharedApplication.keyWindow.rootViewController.setNeedsStatusBarAppearanceUpdate;
 end;
 {$ENDIF}
+{$ENDIF}
 
 class procedure TmyWindow.StatusBarColor(const aForm: TForm; const aColor: TAlphaColor);
 begin
+{$IF CompilerVersion < 32.0}
   if aForm.Fill.Kind <> TBrushKind.Solid then
     aForm.Fill.Kind := TBrushKind.Solid;
   aForm.Fill.Color := aColor;
-{$IFDEF IOS}
-  SetStatusBarBackgroundColor(aColor);
+
+{$IFDEF IOS} SetStatusBarBackgroundColor(aColor); {$ENDIF}
+{$ENDIF}
+{$IF CompilerVersion >= 32.0}
+  aForm.SystemStatusBar.Visibility := TFormSystemStatusBar.TVisibilityMode.VisibleAndOverlap;
+  aForm.SystemStatusBar.BackgroundColor := aColor;
 {$ENDIF}
 end;
 
