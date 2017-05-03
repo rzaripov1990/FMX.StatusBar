@@ -12,7 +12,7 @@ uses
 
 type
   TmyWindow = record
-    class function Init: boolean; static;
+    class procedure Init; static;
     class var StatusBarHeight: Single;
 
     class procedure StatusBarColor(const aForm: TForm; const aColor: TAlphaColor); static;
@@ -22,7 +22,7 @@ implementation
 
 { TmyStatusBar }
 
-class function TmyWindow.Init: boolean;
+class procedure TmyWindow.Init;
 {$IFDEF ANDROID}
 var
   resourceID: Integer;
